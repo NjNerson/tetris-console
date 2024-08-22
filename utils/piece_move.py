@@ -1,18 +1,20 @@
 import time
 import curses
 from utils.pieces import RESET_COLOR
-from utils.game_suspend import PauseHandler 
+from utils.game_suspend import PauseHandler
+from utils.piece_queue import PieceQueue  
 
 class PieceMover:
     def __init__(self, board, piece, stdscr, level):
         self.board = board
+        self.piece_queue = PieceQueue() 
         self.piece = piece
         self.piece_x = (self.board.width - 4) // 2  
         self.piece_y = 0 
         self.stdscr = stdscr
         self.last_fall_time = time.time()
         self.fall_speed = level
-        self.pause_handler = PauseHandler(stdscr) 
+        self.pause_handler = PauseHandler(stdscr)
 
     def can_move(self, dx, dy):
         for row_idx, row in enumerate(self.piece):
@@ -91,7 +93,7 @@ class PieceMover:
                     self.board.clear_lines()
                     if not self.can_move(0, 0):
                         break
-                    self.piece = self.board.get_random_piece()
+                    self.piece = self.piece_queue.get_piece()  
                     self.piece_x = (self.board.width - 4) // 2
                     self.piece_y = 0
                 self.last_fall_time = now
@@ -111,7 +113,7 @@ class PieceMover:
                 self.board.clear_lines()
                 if not self.can_move(0, 0):
                     return False
-                self.piece = self.board.get_random_piece()
+                self.piece = self.piece_queue.get_piece()
                 self.piece_x = (self.board.width - 4) // 2
                 self.piece_y = 0
         elif key == curses.KEY_UP:
