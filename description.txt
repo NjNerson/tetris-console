@@ -17,7 +17,13 @@ GET BONUS WHEN CLEANING MORE THAN ONE LINE AT A TIME
 ##################################################
 CAN PAUSE THE GAME AT ANY TIME
     &PAUSE PRESS "SPACE BAR"
-I   &AT PAUSE STATE : 
+    &AT PAUSE STATE : 
         -CAN RESUME GAME (SPACE BAR)
         -QUIT GAME (Q)
+##################################################
+
+
+
+##################################################
+MANAGE PIECE APPEARANCE USING QUE
 ##################################################

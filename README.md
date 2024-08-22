@@ -26,7 +26,18 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
    ```
 
 3. **Install Dependencies:**
-   This game does not require additional libraries outside the standard Python library.
+
+   **On Windows:**
+
+   install "windows-curses"
+
+   ```bash
+   pip install windows-curses
+   ```
+
+   **On Unix based OS:**
+
+   This game does not require additional libraries outside the standard Python library in Unix like OS. They come with **"curses"** modules.
 
 ## Usage
 
@@ -45,9 +56,12 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 
 - **`main.py`:** Main file to run the game.
 - **`utils/board.py`:** Contains the `Board` class which manages the game grid, piece movements, collisions, and scoring.
-- **`utils/piece.py`:** Contains the `Piece` class to represent Tetris pieces and their rotations.
-- **`utils/pause_handler.py`:** Manages the game pausing functionality.
-- **`utils/config.py`:** Contains game configuration settings such as piece fall speeds.
+- **`utils/pieces.py`:** Contains the `Piece` class to represent Tetris pieces and their rotations.
+- **`utils/game_suspend.py`:** Manages the game pausing functionality.
+- **`utils/game_end.py`:** Contains functions to handle end of a party.
+- **`utils/piece_move.py`:** Contains functions about pieces behavior.
+- **`utils/level.py`:** Contains functions to manage level of game.
+- **`utils/piece_queue.py`:** Contains class to manage piece queue.
 
 ## Example Gameplay
 
