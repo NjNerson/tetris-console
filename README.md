@@ -79,3 +79,7 @@ python main.py
 ##
 
 Use the arrow keys to control the pieces. The game will display the current score and level. The game ends when there is no space for a new piece to appear.
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests. Contributions are welcome!
