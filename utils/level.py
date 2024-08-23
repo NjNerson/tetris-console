@@ -1,10 +1,5 @@
 import time
 
-LEVELS = {
-    'normal': 0.5,        
-    'fast': 0.25,
-    'fast_and_furious': 0.10 
-}
 
 def select_level(stdscr):
     stdscr.clear()
@@ -27,4 +22,4 @@ def select_level(stdscr):
     stdscr.addstr(f"Level chosen {level.upper()}")
     stdscr.refresh()
     time.sleep(1)
-    return LEVELS[level]
+    return level

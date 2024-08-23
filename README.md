@@ -62,6 +62,7 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 - **`utils/piece_move.py`:** Contains functions about pieces behavior.
 - **`utils/level.py`:** Contains functions to manage level of game.
 - **`utils/piece_queue.py`:** Contains class to manage piece queue.
+- **`utils/score.py`:** Contains class to manage best score for each level of game.
 
 ## Example Gameplay
 

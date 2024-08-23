@@ -2,9 +2,14 @@ import time
 import curses
 from utils.pieces import RESET_COLOR
 from utils.game_suspend import PauseHandler
+LEVELS = {
+    'normal': 0.5,        
+    'fast': 0.25,
+    'fast_and_furious': 0.10 
+}
 
 class PieceMover:
-    def __init__(self, board, piece, piece_queue, stdscr, level):
+    def __init__(self, board, piece, piece_queue, stdscr, level,best_score):
         self.board = board
         self.piece_queue = piece_queue 
         self.piece = piece
@@ -12,8 +17,9 @@ class PieceMover:
         self.piece_y = 0 
         self.stdscr = stdscr
         self.last_fall_time = time.time()
-        self.fall_speed = level
+        self.fall_speed = LEVELS[level]
         self.pause_handler = PauseHandler(stdscr)
+        self.best_score = best_score
 
     def can_move(self, dx, dy):
         for row_idx, row in enumerate(self.piece):
@@ -78,7 +84,8 @@ class PieceMover:
             self.stdscr.addstr("+" + "---" * self.board.width + "+\n")
 
             self.stdscr.addstr(f"Score: {self.board.get_score()}\n")
-            
+            self.stdscr.addstr(f"Best Score: {self.best_score}\n")
+
             next_piece = self.piece_queue.preview_piece()
             if next_piece:
                 preview_x = self.board.width * 3 + 10  
