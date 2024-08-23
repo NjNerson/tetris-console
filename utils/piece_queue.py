@@ -7,11 +7,11 @@ class PieceQueue:
         self.fill_queue()
     
     def fill_queue(self):
-        while len(self.queue) < 5:  
+        while len(self.queue) < 10:  
             self.queue.append(get_random_piece())
     
     def get_piece(self):
-        if not self.queue:
+        if len(self.queue)< 2 or not self.queue:
             self.fill_queue()
         return self.queue.popleft()
     
@@ -19,3 +19,4 @@ class PieceQueue:
         if self.queue:
             return self.queue[0]  
         return None
+

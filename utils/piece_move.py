@@ -2,12 +2,11 @@ import time
 import curses
 from utils.pieces import RESET_COLOR
 from utils.game_suspend import PauseHandler
-from utils.piece_queue import PieceQueue  
 
 class PieceMover:
-    def __init__(self, board, piece, stdscr, level):
+    def __init__(self, board, piece, piece_queue, stdscr, level):
         self.board = board
-        self.piece_queue = PieceQueue() 
+        self.piece_queue = piece_queue 
         self.piece = piece
         self.piece_x = (self.board.width - 4) // 2  
         self.piece_y = 0 
@@ -66,17 +65,35 @@ class PieceMover:
                     temp_grid[self.piece_y + row_idx][self.piece_x + col_idx] = cell
 
         self.stdscr.clear()
-        for row in temp_grid:
-            self.stdscr.addstr("|")
-            for cell in row:
-                self.stdscr.addstr(" . " if cell == 0 else f" X ")
-            self.stdscr.addstr("|\n")
-        self.stdscr.addstr("+" + "---" * self.board.width + "+\n")
+        
+        max_y, max_x = self.stdscr.getmaxyx()
 
-        self.stdscr.addstr(f"Score: {self.board.get_score()}\n")
+        if self.board.height + 2 < max_y and self.board.width * 3 + 20 < max_x: 
+            for row_idx, row in enumerate(temp_grid):
+                self.stdscr.addstr("|")
+                for cell in row:
+                    self.stdscr.addstr(" . " if cell == 0 else f" X ")
+                self.stdscr.addstr("|\n")
+            
+            self.stdscr.addstr("+" + "---" * self.board.width + "+\n")
+
+            self.stdscr.addstr(f"Score: {self.board.get_score()}\n")
+            
+            next_piece = self.piece_queue.preview_piece()
+            if next_piece:
+                preview_x = self.board.width * 3 + 10  
+                self.stdscr.addstr(2, preview_x, "Next Piece:")
+                for row_idx, row in enumerate(next_piece):
+                    self.stdscr.addstr(4 + row_idx, preview_x, " ".join([" . " if cell == 0 else " X " for cell in row]))
+
+        else:
+            self.stdscr.addstr("Screen too small to display the game!\n")
+
         if self.pause_handler.paused:
-            self.stdscr.addstr("Game Paused. Press SPACE to resume or 'q' to quit.\n")
+            self.stdscr.addstr(max_y - 2, 0, "Game Paused. Press SPACE to resume or 'q' to quit.\n")
+
         self.stdscr.refresh()
+
 
     def run(self):
         while True:
@@ -93,7 +110,7 @@ class PieceMover:
                     self.board.clear_lines()
                     if not self.can_move(0, 0):
                         break
-                    self.piece = self.piece_queue.get_piece()  
+                    self.piece = self.piece_queue.get_piece() 
                     self.piece_x = (self.board.width - 4) // 2
                     self.piece_y = 0
                 self.last_fall_time = now
