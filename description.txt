@@ -25,5 +25,7 @@ CAN PAUSE THE GAME AT ANY TIME
 
 
 ##################################################
-MANAGE PIECE APPEARANCE USING QUE
+MANAGE PIECE APPEARANCE USING QUEUE
+    &USE QUEUE TO HANDLE PIECES
+    &PREVIEW THE NEXT COMMING PIECE
 ##################################################
