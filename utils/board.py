@@ -25,7 +25,7 @@ class Board:
             self.grid.insert(0, [0] * self.width)
 
     def update_score(self, lines_cleared):
-        bonus= round(lines_cleared/2) if lines_cleared>1 else 0
+        bonus= lines_cleared if lines_cleared>1 else 0
         self.score += (lines_cleared * 10 )  + bonus
 
     def get_score(self):
