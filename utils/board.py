@@ -2,7 +2,7 @@ class Board:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.score=0
+        self.score = 0
         self.grid = [[0] * width for _ in range(height)]
     
     def is_within_bounds(self, x, y):
@@ -18,15 +18,24 @@ class Board:
                     self.grid[y + row_idx][x + col_idx] = cell
 
     def clear_lines(self):
-        lines_to_clear = [i for i, row in enumerate(self.grid) if all(cell != 0 for cell in row)]
-        self.update_score(len(lines_to_clear))
-        for i in reversed(lines_to_clear):
-            del self.grid[i]
-            self.grid.insert(0, [0] * self.width)
+        new_grid = []
+        lines_cleared = 0
+        
+        for row in reversed(self.grid):
+            if all(cell != 0 for cell in row):
+                lines_cleared += 1
+            else:
+                new_grid.insert(0, row)
+        
+        for _ in range(lines_cleared):
+            new_grid.insert(0, [0] * self.width)
+        
+        self.grid = new_grid
+        self.update_score(lines_cleared)
 
     def update_score(self, lines_cleared):
-        bonus= lines_cleared if lines_cleared>1 else 0
-        self.score += (lines_cleared * 10 )  + bonus
+        bonus = lines_cleared if lines_cleared > 1 else 0
+        self.score += (lines_cleared * 10) + bonus
 
     def get_score(self):
         return self.score

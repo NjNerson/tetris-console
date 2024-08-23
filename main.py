@@ -35,5 +35,5 @@ if __name__ == "__main__":
     try:
         curses.wrapper(main)
     except KeyboardInterrupt:
-        print("Quiting....")
+        print("Quitting....")
         time.sleep(0.5)
