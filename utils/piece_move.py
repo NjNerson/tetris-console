@@ -20,6 +20,7 @@ class PieceMover:
         self.fall_speed = LEVELS[level]
         self.pause_handler = PauseHandler(stdscr)
         self.best_score = best_score
+        self.level=level
 
     def can_move(self, dx, dy):
         for row_idx, row in enumerate(self.piece):
@@ -83,16 +84,17 @@ class PieceMover:
             
             self.stdscr.addstr("+" + "---" * self.board.width + "+\n")
 
-            self.stdscr.addstr(f"Score: {self.board.get_score()}\n")
-            self.stdscr.addstr(f"Best Score: {self.best_score}\n")
-
             next_piece = self.piece_queue.preview_piece()
             if next_piece:
                 preview_x = self.board.width * 3 + 10  
-                self.stdscr.addstr(2, preview_x, "Next Piece:")
+                
+                self.stdscr.addstr(1, preview_x, "Next Piece:",curses.A_UNDERLINE)
                 for row_idx, row in enumerate(next_piece):
-                    self.stdscr.addstr(4 + row_idx, preview_x, " ".join([" . " if cell == 0 else " X " for cell in row]))
+                    self.stdscr.addstr(3 + row_idx, preview_x, " ".join([" . " if cell == 0 else " X " for cell in row]))
 
+                self.stdscr.addstr(10,preview_x,f"LEVEL {self.level.upper()}\n",curses.A_UNDERLINE)
+                self.stdscr.addstr(11,preview_x,f"Score: {self.board.get_score()}\n")
+                self.stdscr.addstr(12,preview_x,f"Best Score: {self.best_score}\n")
         else:
             self.stdscr.addstr("Screen too small to display the game!\n")
 
