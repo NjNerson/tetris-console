@@ -16,7 +16,7 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 
 ## Installation
 
-1. **Ensure Python 3.10 is installed:** This game is built using Python 3.10. Download and install it from the [official Python website](https://www.python.org/downloads/).
+1. **Ensure Python is installed:** This game is built using Python. Download and install it from the [official Python website](https://www.python.org/downloads/).
 
 2. **Clone the Repository:**
 
@@ -27,17 +27,19 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 
 3. **Install Dependencies:**
 
-   **On Windows:**
+   Install **pygame**
 
-   install "windows-curses"
+   ```bash
+   pip install pygame
+   ```
+
+   **On Windows Only:**
+
+   On Windows, need to install **windows-curses**
 
    ```bash
    pip install windows-curses
    ```
-
-   **On Unix based OS:**
-
-   This game does not require additional libraries outside the standard Python library in Unix like OS. They come with **"curses"** modules.
 
 ## Usage
 
@@ -49,7 +51,7 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 
 2. **Game Controls:**
    - **Arrow Keys:** Move the piece left, right, or accelerate down.
-   - **Up Arrow:** Rotate the piece.
+   - **Up Arrow:** Rotate the piece 90° clockwise.
    - **Space Bar:** Pause and resume the game.
 
 ## Code Structure
@@ -63,6 +65,7 @@ This is a console-based Tetris game implemented in Python. The game runs in the 
 - **`utils/level.py`:** Contains functions to manage level of game.
 - **`utils/piece_queue.py`:** Contains class to manage piece queue.
 - **`utils/score.py`:** Contains class to manage best score for each level of game.
+- **`docs/`:** Contains media files( musics and pictures)
 
 ## Example Gameplay
 
