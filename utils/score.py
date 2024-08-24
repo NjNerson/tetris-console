@@ -24,6 +24,8 @@ class Score:
             if score > self.scores[level]:
                 self.scores[level] = score
                 self.save_scores()
+                return True
+        return False
     
     def save_scores(self):
         with open(self.filename, 'w') as file:
